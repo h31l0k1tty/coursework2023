@@ -1,0 +1,54 @@
+﻿<Window x:Class="MyCashier.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyCashier"
+        xmlns:viewmodels="clr-namespace:MyCashier.MVVM.ViewModels"
+        xmlns:views="clr-namespace:MyCashier.MVVM.Views"
+        Title="MyCashier" 
+        Height="830" Width="1280"
+        MaxHeight="830" MaxWidth="1280"
+        MinHeight="830" MinWidth="1280"
+        Background="#D5D7CC">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Background="#8DAAA6" 
+                    Orientation="Horizontal" 
+                    Width="1280" Height="100" 
+                    VerticalAlignment="Top">
+            <Border CornerRadius="10" 
+                    Width="75" Height="75" 
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Left" 
+                    Margin="10" Panel.ZIndex="1">
+                <Border.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="/Resource/Yb-W2S4RRJQ.jpg"/>
+                </Border.Background>
+            </Border>
+            <TextBlock Text="MyCashier" 
+                       Margin="5" Foreground="White"
+                       Width="230" Height="60" 
+                       FontSize="50" FontFamily="Britannic Bold"/>
+        </StackPanel>
+
+        
+        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}">
+            <ContentControl.Resources> <!--Словарь, для сопоставления View с ViewModel-->
+                <DataTemplate DataType='{x:Type viewmodels:UC_AuthorisationVM}'>
+                    <views:UC_Authorisation/>
+                </DataTemplate>
+                <DataTemplate DataType='{x:Type viewmodels:UC_RegistrationVM}'>
+                    <views:UC_Registration/>
+                </DataTemplate>
+                <DataTemplate DataType='{x:Type viewmodels:UC_MainVM}'>
+                    <views:UC_Main/>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
+    </Grid>
+</Window>
