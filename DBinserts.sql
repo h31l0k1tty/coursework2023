@@ -1,4 +1,4 @@
--- Active: 1697616242142@@127.0.0.1@5432@MyCashierDB
+-- Active: 1699354628012@@185.252.146.21@5432@MyCashierDB
 insert into "User" values
 (default, 'admin', '1234567', 'admin', 'email');
 

@@ -1,4 +1,4 @@
--- Active: 1697616242142@@127.0.0.1@5432@MyCashierDB
+-- Active: 1699354628012@@185.252.146.21@5432@MyCashierDB
 
 drop table
     "User",
@@ -32,9 +32,9 @@ create table "Currency"(
 );
 create table "Account"(
 	"id" uuid default gen_random_uuid() NOT NULL,
-	"name" varchar(50) unique NOT NULL,
-	"balance" decimal default 0 NOT NULL,
-	"currencyID" char(3) references "Currency"("id") NOT NULL,
+	"name" varchar(50) unique NOT NULL, --Имя
+	"balance" decimal default 0 NOT NULL, --Текущий баланс
+	"currencyID" char(3) references "Currency"("id") NOT NULL, --Валюта
 	"userID" uuid references "User"("id") NOT NULL,
 	PRIMARY KEY("id")
 );
