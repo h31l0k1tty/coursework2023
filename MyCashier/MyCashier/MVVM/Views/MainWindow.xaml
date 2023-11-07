@@ -38,7 +38,7 @@
 
         
         <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}">
-            <ContentControl.Resources> <!--Словарь, для сопоставления View с ViewModel-->
+            <ContentControl.Resources> <!--Словарь, для сопоставления View с ViewModel -->
                 <DataTemplate DataType='{x:Type viewmodels:UC_AuthorisationVM}'>
                     <views:UC_Authorisation/>
                 </DataTemplate>
