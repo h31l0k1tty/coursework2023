@@ -47,7 +47,7 @@
                             FontSize="16"
                             FontFamily="Palatino Linotype" 
                             FontWeight="Light"
-                            Foreground="Red"/>
+                            Foreground="#8DAAA6"/>
                 <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
                     Margin="10 3 10 10" 
                     Width="400" Height="20" 
