@@ -29,6 +29,21 @@ namespace MyCashier.MVVM.ViewModels
             }
         }
 
+        private bool isRememberMeChecked;
+
+        public bool IsRememberMeChecked
+        {
+            get { return isRememberMeChecked; }
+            set
+            {
+                if (isRememberMeChecked != value)
+                {
+                    isRememberMeChecked = value;
+                    OnPropertyChanged(nameof(IsRememberMeChecked));
+                }
+            }
+        }
+
 
         private RelayCommand authoriseCmd = null!;
         public RelayCommand AuthoriseCmd
@@ -43,7 +58,7 @@ namespace MyCashier.MVVM.ViewModels
                             if (db.User.FirstOrDefault(c => c.login == Login && c.password == Password) != null)
                             {
                                 CurrentUser.Set(db.User.FirstOrDefault(c => c.login == Login && c.password == Password));
-                                Navigator.Navigate(new UC_Main());
+                                Navigator.Navigate(new UC_AddAccountVM());
                             }
                             else
                                 MessageBox.Show("Авторизация не пройдена");

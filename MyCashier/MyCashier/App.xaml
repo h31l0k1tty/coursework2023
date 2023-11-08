@@ -34,10 +34,9 @@
                         <ControlTemplate TargetType="{x:Type TextBox}">
                             <Grid>
                                 <Border CornerRadius="5,0,0,5"  
-               BorderThickness="1,1,0,1"  
-               Background="#DBDBDB"
-               BorderBrush="#DBDBDB">
-                                    <ScrollViewer x:Name="PART_ContentHost"/>
+                                        BorderThickness="1,1,0,1"  
+                                        Background="#DBDBDB"
+                                        BorderBrush="#DBDBDB">
                                 </Border>
                             </Grid>
                         </ControlTemplate>

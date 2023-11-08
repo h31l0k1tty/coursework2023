@@ -45,6 +45,12 @@
                 <DataTemplate DataType='{x:Type viewmodels:UC_RegistrationVM}'>
                     <views:UC_Registration/>
                 </DataTemplate>
+                <DataTemplate DataType='{x:Type viewmodels:UC_AddAccountVM}'>
+                    <views:UC_AddAccount/>
+                </DataTemplate>
+                
+
+
                 <DataTemplate DataType='{x:Type viewmodels:UC_MainVM}'>
                     <views:UC_Main/>
                 </DataTemplate>

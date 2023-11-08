@@ -16,9 +16,9 @@ using System.Windows.Shapes;
 namespace MyCashier.MVVM.Views
 {
     /// <summary>
-    /// Логика взаимодействия для UC_AddAccount.xaml
+    /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class UC_AddAccount : Page
+    public partial class UC_AddAccount : UserControl
     {
         public UC_AddAccount()
         {
