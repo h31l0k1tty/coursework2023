@@ -46,7 +46,7 @@
                     <views:UC_Registration/>
                 </DataTemplate>
                 <DataTemplate DataType='{x:Type viewmodels:UC_AddAccountVM}'>
-                    <views:UC_AddAccount_1/>
+                    <views:UC_AddAccount/>
                 </DataTemplate>
                 
 

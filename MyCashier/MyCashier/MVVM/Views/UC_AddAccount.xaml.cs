@@ -18,9 +18,9 @@ namespace MyCashier.MVVM.Views
     /// <summary>
     /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class UC_AddAccount_1 : UserControl
+    public partial class UC_AddAccount : UserControl
     {
-        public UC_AddAccount_1()
+        public UC_AddAccount()
         {
             InitializeComponent();
         }
