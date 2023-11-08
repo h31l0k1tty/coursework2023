@@ -35,8 +35,8 @@
                        Width="230" Height="60" 
                        FontSize="50" FontFamily="Britannic Bold"/>
         </StackPanel>
-
         
+
         <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}">
             <ContentControl.Resources> <!--Словарь, для сопоставления View с ViewModel-->
                 <DataTemplate DataType='{x:Type viewmodels:UC_AuthorisationVM}'>
@@ -45,6 +45,12 @@
                 <DataTemplate DataType='{x:Type viewmodels:UC_RegistrationVM}'>
                     <views:UC_Registration/>
                 </DataTemplate>
+                <DataTemplate DataType='{x:Type viewmodels:UC_AddAccountVM}'>
+                    <views:UC_AddAccount_1/>
+                </DataTemplate>
+                
+
+
                 <DataTemplate DataType='{x:Type viewmodels:UC_MainVM}'>
                     <views:UC_Main/>
                 </DataTemplate>

@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="MyCashier.MVVM.Views.UC_AddAccount_1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyCashier.MVVM.Views"
+             xmlns:viewmodels="clr-namespace:MyCashier.MVVM.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="830" d:DesignWidth="1280">
+    <UserControl.DataContext>
+        <viewmodels:UC_AddAccountVM/>
+    </UserControl.DataContext>
+    <Grid>
+        <StackPanel Orientation="Vertical"
+             Background="White"
+             Width="550" Height="730"
+             HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <TextBlock Text="Добавление счёта" Margin="10 150 0 0"
+                HorizontalAlignment="Center"
+                FontSize="35" FontFamily="Palatino Linotype" FontWeight="Black"/>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical" Width="200" HorizontalAlignment="Left" Margin="40 50 10 50">
+                    <TextBlock Text="Введите название:"
+                           FontSize="20"
+                           FontFamily="Palatino Linotype"
+                           HorizontalAlignment="Right"/>
+                    <TextBlock Text="Введите баланс:"
+                           FontSize="20"
+                           FontFamily="Palatino Linotype"
+                           HorizontalAlignment="Right"/>
+                    <TextBlock Text="Выберите валюту:"
+                           FontSize="20"
+                           FontFamily="Palatino Linotype"
+                           HorizontalAlignment="Right"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Width="250" HorizontalAlignment="Right">
+                    <TextBox Background="#DBDBDB" 
+                             BorderBrush="#DBDBDB"
+                             Style="{DynamicResource TextBoxStyle}" 
+                             Height="20"
+                             Margin="0 55 0 0"/>
+                    <TextBox Background="#DBDBDB" 
+                             BorderBrush="#DBDBDB"
+                             Style="{DynamicResource TextBoxStyle}" 
+                             Height="20"
+                             Margin="0 7 0 0"/>
+                    <ComboBox
+                        FontSize="20" FontFamily="Palatino Linotype" 
+                        Margin="0 5 0 0"
+                        Height="20"
+                        BorderBrush="#DBDBDB" 
+                        Background="#DBDBDB" 
+                        />
+                </StackPanel>
+            </StackPanel>
+            <Button
+                Content="Создать" 
+                Width="220"
+                HorizontalAlignment="Center" 
+                FontSize="20" 
+                FontFamily="Palatino Linotype"
+                BorderBrush="#8DAAA6" 
+                Background="#8DAAA6" 
+                Foreground="#D5D7CC">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+        <Button
+            Content="Отмена"
+            Width="175" Height="30" 
+            VerticalAlignment="Bottom" 
+            HorizontalAlignment="Left"
+            FontSize="20" FontFamily="Palatino Linotype" 
+            Margin="20"
+            BorderBrush="White" 
+            Background="White" 
+            Foreground="#F6D5B6">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"></Setter>
+                </Style>
+            </Button.Resources>
+        </Button>
+    </Grid>
+</UserControl>
