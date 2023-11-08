@@ -44,10 +44,9 @@
                              Margin="0 7 0 0"/>
                     <ComboBox
                         FontSize="20" FontFamily="Palatino Linotype" 
-                        Margin="0 5 0 0"
+                        Margin="0 7 0 0"
                         Height="20"
-                        BorderBrush="#DBDBDB" 
-                        Background="#DBDBDB" 
+                        Style="{StaticResource ComboBoxStyle}"
                         />
                 </StackPanel>
             </StackPanel>
