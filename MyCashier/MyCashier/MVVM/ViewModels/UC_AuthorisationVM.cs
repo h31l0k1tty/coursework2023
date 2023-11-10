@@ -58,7 +58,7 @@ namespace MyCashier.MVVM.ViewModels
                             if (db.User.FirstOrDefault(c => c.login == Login && c.password == Password) != null)
                             {
                                 CurrentUser.Set(db.User.FirstOrDefault(c => c.login == Login && c.password == Password));
-                                Navigator.Navigate(new UC_AddAccountVM());
+                                Navigator.Navigate(new UC_Journal());
                             }
                             else
                                 MessageBox.Show("Авторизация не пройдена");

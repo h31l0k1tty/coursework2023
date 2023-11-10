@@ -44,9 +44,7 @@
                             FontFamily="Palatino Linotype" FontWeight="Black"/>
                 <TextBlock Text="Не менее 7 символов"
                             HorizontalAlignment="Center"
-                            FontSize="16"
-                            FontFamily="Palatino Linotype" 
-                            FontWeight="Light"
+                            FontSize="16" FontFamily="Palatino Linotype" FontWeight="Light"
                             Foreground="#8DAAA6"/>
                 <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
                     Margin="10 3 10 10" 
@@ -71,9 +69,7 @@
                 HorizontalAlignment="Center" 
                 FontSize="20" 
                 FontFamily="Palatino Linotype"
-                BorderBrush="#8DAAA6" 
-                Background="#8DAAA6" 
-                Foreground="#D5D7CC">
+                BorderBrush="#8DAAA6" Background="#8DAAA6" Foreground="#D5D7CC">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"></Setter>
@@ -84,13 +80,10 @@
         <Button Command="{Binding GoToAuthorisationCmd}"
             Content="Отмена"
             Width="175" Height="30" 
-            VerticalAlignment="Bottom" 
-            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom" HorizontalAlignment="Left"
             FontSize="20" FontFamily="Palatino Linotype" 
             Margin="20"
-            BorderBrush="White" 
-            Background="White" 
-            Foreground="#F6D5B6">
+            BorderBrush="White" Background="White" Foreground="#F6D5B6">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"></Setter>
