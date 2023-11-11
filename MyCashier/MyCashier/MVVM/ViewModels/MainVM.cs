@@ -1,9 +1,5 @@
 ﻿using MyCashier.Services;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyCashier.MVVM.ViewModels
 {
@@ -26,7 +22,8 @@ namespace MyCashier.MVVM.ViewModels
         public MainVM()
         {
             Navigator.NavigateEvent += UpdateViewModel; //Подписываемся на событие Navigator'а
-            Navigator.Navigate(new UC_AuthorisationVM()); //Устанавливаем начальную ViewModel
+
+            Navigator.Navigate(new UC_AuthorisationVM(Properties.Settings.Default.Login, Properties.Settings.Default.Password));
         }
     }
 }

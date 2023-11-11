@@ -1,5 +1,7 @@
-﻿using MyCashier.MVVM.Views;
+﻿using MyCashier.MVVM.Models;
+using MyCashier.MVVM.Views;
 using MyCashier.Services;
+using System;
 using System.Linq;
 using System.Windows;
 
@@ -7,41 +9,60 @@ namespace MyCashier.MVVM.ViewModels
 {
     public class UC_AuthorisationVM : ViewModelBase
     {
-        private string _login = "admin";
+        public UC_AuthorisationVM(string? login = null, string? password = null)
+        {
+            if (login != null) _login = login;
+            if (password != null) _password = password;
+            OnWasRememberMeChanged += RememberMeChanged;
+        }
+
+
+        User? newUser;
+
+        private string _login = Properties.Settings.Default.Login;
         public string Login
         {
             get { return _login; }
             set
             {
-                _login = value;
+                _login = value.Trim();
                 OnPropertyChanged(nameof(Login));
             }
         }
 
-        private string _password = "1234567";
+        private string _password = Properties.Settings.Default.Password;
         public string Password
         {
             get { return _password; }
             set
             {
-                _password = value;
+                _password = value.Trim();
                 OnPropertyChanged(nameof(Password));
             }
         }
 
-        private bool isRememberMeChecked;
-
+        private bool isRememberMeChecked = Properties.Settings.Default.WasRememberMeChecked;
         public bool IsRememberMeChecked
         {
             get { return isRememberMeChecked; }
             set
             {
-                if (isRememberMeChecked != value)
-                {
-                    isRememberMeChecked = value;
-                    OnPropertyChanged(nameof(IsRememberMeChecked));
-                }
+                isRememberMeChecked = value;
+                OnPropertyChanged(nameof(IsRememberMeChecked));
+
+                Properties.Settings.Default.WasRememberMeChecked = value; //Привязываем Settings к CheckBox
+                OnWasRememberMeChanged?.Invoke(value);
             }
+        }
+
+
+        public delegate void WasRememberMeChecked(bool isRememberMeChecked);
+        public static event WasRememberMeChecked? OnWasRememberMeChanged;
+        private void RememberMeChanged(bool isRememberMeChecked)
+        {
+            Properties.Settings.Default.Login = Properties.Settings.Default.WasRememberMeChecked ? Login : null!;
+            Properties.Settings.Default.Password = Properties.Settings.Default.WasRememberMeChecked ? Password : null!;
+            Properties.Settings.Default.Save();
         }
 
 
@@ -53,18 +74,18 @@ namespace MyCashier.MVVM.ViewModels
                 return authoriseCmd ?? new RelayCommand
                     (obj =>
                     {
-                        using (MyCashierDbContext db = new MyCashierDbContext())
+                        using (MyCashierDbContext db = new())
                         {
-                            if (db.User.FirstOrDefault(c => c.login == Login && c.password == Password) != null)
+                            //Проверка входных данных
+                            newUser = db.User.FirstOrDefault(c => c.login == Login && c.password == Password);
+                            if (newUser != null)
                             {
-                                CurrentUser.Set(db.User.FirstOrDefault(c => c.login == Login && c.password == Password));
-                                Navigator.Navigate(new UC_AddAccountVM());
+                                CurrentUser.SetUser(newUser);
+                                Navigator.Navigate(new UC_MainVM());
                             }
-                            else
-                                MessageBox.Show("Авторизация не пройдена");
+                            else MessageBox.Show("Неверный логин или пароль");
                         };
-                    },
-                    obj => !string.IsNullOrEmpty(Login) && Password?.Length > 6);
+                    }, obj => !string.IsNullOrEmpty(Login?.Trim()) && Password?.Trim().Length > 6);
             }
         }
 
@@ -74,7 +95,10 @@ namespace MyCashier.MVVM.ViewModels
             get
             {
                 return goToRegisterCmd ?? new RelayCommand
-                    (obj => { Navigator.Navigate(new UC_RegistrationVM()); });
+                    (obj => 
+                    { 
+                        Navigator.Navigate(new UC_RegistrationVM(Login, Password));
+                    });
             }
         }
     }

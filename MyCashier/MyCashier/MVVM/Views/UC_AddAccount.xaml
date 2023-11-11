@@ -7,9 +7,6 @@
              xmlns:viewmodels="clr-namespace:MyCashier.MVVM.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="830" d:DesignWidth="1280">
-    <UserControl.DataContext>
-        <viewmodels:UC_AddAccountVM/>
-    </UserControl.DataContext>
     <Grid>
         <StackPanel Orientation="Vertical"
              Background="White"
@@ -53,7 +50,7 @@
                         />
                 </StackPanel>
             </StackPanel>
-            <Button Command="{Binding RegisterCmd}"
+            <Button Command="{Binding }"
                 Content="Создать" 
                 Width="220"
                 HorizontalAlignment="Center" 
@@ -69,7 +66,7 @@
                 </Button.Resources>
             </Button>
         </StackPanel>
-        <Button Command="{Binding GoToAuthorisationCmd}"
+        <Button Command="{Binding }"
             Content="Отмена"
             Width="175" Height="30" 
             VerticalAlignment="Bottom" 

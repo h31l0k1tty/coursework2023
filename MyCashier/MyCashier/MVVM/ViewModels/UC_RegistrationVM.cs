@@ -7,13 +7,19 @@ namespace MyCashier.MVVM.ViewModels
 {
     public class UC_RegistrationVM : ViewModelBase
     {
+        public UC_RegistrationVM(string? login = null, string? password = null)
+        {
+            if (login != null) { _login = login; }
+            if (password != null) { _password = password; }
+        }
+
         private string _email = null!;
         public string Email
         {
             get { return _email; }
             set
             {
-                _email = value;
+                _email = value.Trim();
                 OnPropertyChanged(nameof(Email));
             }
         }
@@ -24,7 +30,7 @@ namespace MyCashier.MVVM.ViewModels
             get { return _login; }
             set
             {
-                _login = value;
+                _login = value.Trim();
                 OnPropertyChanged(nameof(Login));
             }
         }
@@ -35,7 +41,7 @@ namespace MyCashier.MVVM.ViewModels
             get { return _password; }
             set
             {
-                _password = value;
+                _password = value.Trim();
                 OnPropertyChanged(nameof(Password));
             }
         }
@@ -68,16 +74,17 @@ namespace MyCashier.MVVM.ViewModels
                                 MessageBox.Show("Пользователем с такой эл. почтой уже существует!");
                             else
                             {
-                                db.User.Add(new User()
+                                User newUser = new()
                                 {
                                     id = default,
-                                    login = Login,
-                                    password = Password,
-                                    name = Name,
-                                    email = Email
-                                });
+                                    login = Login.Trim(),
+                                    password = Password.Trim(),
+                                    name = Name.Trim(),
+                                    email = Email.Trim()
+                                };
+                                db.User.Add(newUser);
                                 db.SaveChanges();
-                                Navigator.Navigate(new UC_MainVM());
+                                Navigator.Navigate(new UC_AuthorisationVM(Login, Password));
                             };
                         };
                     },
@@ -95,7 +102,10 @@ namespace MyCashier.MVVM.ViewModels
             get
             {
                 return goToAuthorisationCmd ?? new RelayCommand
-                    (obj => { Navigator.GoBack(); });
+                    (obj => 
+                    { 
+                        Navigator.Navigate(new UC_AuthorisationVM(Login, Password));
+                    });
             }
         }
     }

@@ -7,9 +7,6 @@
              xmlns:viewmodels="clr-namespace:MyCashier.MVVM.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="830" d:DesignWidth="1280">
-    <UserControl.DataContext>
-        <viewmodels:UC_AuthorisationVM/>
-    </UserControl.DataContext>
     <Grid>
         <StackPanel Orientation="Vertical"
                     Background="White"
@@ -48,7 +45,7 @@
                       BorderBrush="#DBDBDB"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Width="400" Margin="10">
-                <CheckBox IsChecked="{Binding IsRememberMeChecked, Mode=TwoWay}"
+                <CheckBox IsChecked="{Binding IsRememberMeChecked, UpdateSourceTrigger=PropertyChanged}"
                     Margin="0 0 5 0">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="2" ScaleY="2" />

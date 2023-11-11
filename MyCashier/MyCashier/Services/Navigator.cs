@@ -10,8 +10,6 @@ namespace MyCashier.Services
     {
         private static object currentViewModel = null!;
         public static object CurrentViewModel { get { return currentViewModel; } }
-        private static object lastViewModel = null!;
-
 
         public delegate void NavigateDelegate(object ViewModel);
         public static event NavigateDelegate? NavigateEvent;
@@ -21,16 +19,8 @@ namespace MyCashier.Services
                 который в свою очередь был подписан на NavigateEvent в MainVM */
         public static void Navigate(object ViewModel)
         {
-            lastViewModel = currentViewModel;
             currentViewModel = ViewModel;
-
             NavigateEvent?.Invoke(currentViewModel);
-        }
-
-        public static void GoBack()
-        {
-            currentViewModel = lastViewModel;
-            Navigate(currentViewModel);
         }
     }
 }

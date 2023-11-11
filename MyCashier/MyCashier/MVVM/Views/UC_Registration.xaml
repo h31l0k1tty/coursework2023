@@ -7,9 +7,6 @@
              xmlns:viewmodels="clr-namespace:MyCashier.MVVM.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="830" d:DesignWidth="1280">
-    <UserControl.DataContext>
-        <viewmodels:UC_RegistrationVM/>
-    </UserControl.DataContext>
     <Grid>
         <StackPanel Orientation="Vertical"
              Background="White"
@@ -60,7 +57,7 @@
                    Foreground="Black"
                    FontFamily="Palatino Linotype" FontWeight="Black"/>
                 <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
-                    Margin="10" 
+                    Margin="10 10 10 30" 
                     Width="400" Height="20" 
                     Background="#DBDBDB" 
                     Style="{DynamicResource TextBoxStyle}" BorderBrush="#DBDBDB"/>
@@ -82,8 +79,8 @@
             </Button>
         </StackPanel>
         <Button Command="{Binding GoToAuthorisationCmd}"
-            Content="Отмена"
-            Width="175" Height="30" 
+            Content="На страницу авторизации"
+            Width="260" Height="30" 
             VerticalAlignment="Bottom" 
             HorizontalAlignment="Left"
             FontSize="20" FontFamily="Palatino Linotype" 
