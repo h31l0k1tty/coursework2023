@@ -66,26 +66,23 @@ namespace MyCashier.MVVM.ViewModels
                 return registerCmd ?? new RelayCommand
                     (obj =>
                     {
-                        using (MyCashierDbContext db = new MyCashierDbContext())
+                        if (MyCashierDbContext.db.User.FirstOrDefault(c => c.login == Login) != null)
+                            MessageBox.Show("Пользователем с таким логином уже существует!");
+                        else if (MyCashierDbContext.db.User.FirstOrDefault(c => c.email == Email) != null)
+                            MessageBox.Show("Пользователем с такой эл. почтой уже существует!");
+                        else
                         {
-                            if (db.User.FirstOrDefault(c => c.login == Login) != null)
-                                MessageBox.Show("Пользователем с таким логином уже существует!");
-                            else if (db.User.FirstOrDefault(c => c.email == Email) != null)
-                                MessageBox.Show("Пользователем с такой эл. почтой уже существует!");
-                            else
+                            User newUser = new()
                             {
-                                User newUser = new()
-                                {
-                                    id = default,
-                                    login = Login.Trim(),
-                                    password = Password.Trim(),
-                                    name = Name.Trim(),
-                                    email = Email.Trim()
-                                };
-                                db.User.Add(newUser);
-                                db.SaveChanges();
-                                Navigator.Navigate(new UC_AuthorisationVM(Login, Password));
+                                id = default,
+                                login = Login.Trim(),
+                                password = Password.Trim(),
+                                name = Name.Trim(),
+                                email = Email.Trim()
                             };
+                            MyCashierDbContext.db.User.Add(newUser);
+                            MyCashierDbContext.db.SaveChanges();
+                            Navigator.Navigate(new UC_AuthorisationVM(Login, Password));
                         };
                     },
                     obj =>
@@ -102,10 +99,7 @@ namespace MyCashier.MVVM.ViewModels
             get
             {
                 return goToAuthorisationCmd ?? new RelayCommand
-                    (obj => 
-                    { 
-                        Navigator.Navigate(new UC_AuthorisationVM(Login, Password));
-                    });
+                    (obj => { Navigator.Navigate(new UC_AuthorisationVM(Login, Password)); });
             }
         }
     }

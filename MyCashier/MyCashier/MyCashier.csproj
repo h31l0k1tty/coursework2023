@@ -8,7 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="MVVM\ViewModels\UC_MainVM.cs" />
+    <Compile Remove="MVVM\Views\UC_Main.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resource\Yb-W2S4RRJQ.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="MVVM\Views\UC_Main.xaml" />
   </ItemGroup>
 
   <ItemGroup>

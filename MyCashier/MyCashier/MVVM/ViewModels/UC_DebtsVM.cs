@@ -4,23 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace MyCashier.MVVM.ViewModels
 {
-    public class UC_MainVM : ViewModelBase
+    public class UC_DebtsVM : ViewModelBase
     {
-        private string userName = CurrentUser.Name;
-        public string UserName
-        {
-            get { return userName; }
-            set 
-            { 
-                userName = value;
-                OnPropertyChanged(nameof(UserName));
-            }
-        }
-
         private RelayCommand logOutCmd = null!;
         public RelayCommand LogOutCmd
         {

@@ -4,23 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace MyCashier.MVVM.ViewModels
 {
-    public class UC_MainVM : ViewModelBase
+    public class UC_JournalVM : ViewModelBase
     {
-        private string userName = CurrentUser.Name;
-        public string UserName
-        {
-            get { return userName; }
-            set 
-            { 
-                userName = value;
-                OnPropertyChanged(nameof(UserName));
-            }
-        }
-
         private RelayCommand logOutCmd = null!;
         public RelayCommand LogOutCmd
         {
@@ -28,6 +16,16 @@ namespace MyCashier.MVVM.ViewModels
             {
                 return logOutCmd ?? new RelayCommand
                     (obj => { Navigator.Navigate(new UC_AuthorisationVM()); });
+            }
+        }
+
+        private RelayCommand goToAddAccountCmd = null!;
+        public RelayCommand GoToAddAccountCmd
+        {
+            get
+            {
+                return goToAddAccountCmd ?? new RelayCommand
+                    (obj => { Navigator.Navigate(new UC_AddAccountVM()); });
             }
         }
     }

@@ -13,7 +13,6 @@ namespace MyCashier.MVVM.ViewModels
         {
             if (login != null) _login = login;
             if (password != null) _password = password;
-            OnWasRememberMeChanged += RememberMeChanged;
         }
 
 
@@ -49,17 +48,14 @@ namespace MyCashier.MVVM.ViewModels
             {
                 isRememberMeChecked = value;
                 OnPropertyChanged(nameof(IsRememberMeChecked));
-
-                Properties.Settings.Default.WasRememberMeChecked = value; //Привязываем Settings к CheckBox
-                OnWasRememberMeChanged?.Invoke(value);
+                RememberMeChanged(IsRememberMeChecked); //Привязываем Settings к CheckBox
             }
         }
 
 
-        public delegate void WasRememberMeChecked(bool isRememberMeChecked);
-        public static event WasRememberMeChecked? OnWasRememberMeChanged;
         private void RememberMeChanged(bool isRememberMeChecked)
         {
+            Properties.Settings.Default.WasRememberMeChecked = isRememberMeChecked;
             Properties.Settings.Default.Login = Properties.Settings.Default.WasRememberMeChecked ? Login : null!;
             Properties.Settings.Default.Password = Properties.Settings.Default.WasRememberMeChecked ? Password : null!;
             Properties.Settings.Default.Save();
@@ -74,18 +70,17 @@ namespace MyCashier.MVVM.ViewModels
                 return authoriseCmd ?? new RelayCommand
                     (obj =>
                     {
-                        using (MyCashierDbContext db = new())
+                        //Проверка входных данных
+                        newUser = MyCashierDbContext.db.User.FirstOrDefault(c => c.login == Login && c.password == Password);
+                        if (newUser != null)
                         {
-                            //Проверка входных данных
-                            newUser = db.User.FirstOrDefault(c => c.login == Login && c.password == Password);
-                            if (newUser != null)
-                            {
-                                CurrentUser.SetUser(newUser);
-                                Navigator.Navigate(new UC_MainVM());
-                            }
-                            else MessageBox.Show("Неверный логин или пароль");
-                        };
-                    }, obj => !string.IsNullOrEmpty(Login?.Trim()) && Password?.Trim().Length > 6);
+                            CurrentUser.SetUser(newUser);
+                            Navigator.Navigate(new UC_JournalVM());
+                        }
+                        else 
+                            MessageBox.Show("Неверный логин или пароль");
+                    }, 
+                    obj => !string.IsNullOrEmpty(Login?.Trim()) && Password?.Trim().Length > 6);
             }
         }
 
@@ -95,10 +90,7 @@ namespace MyCashier.MVVM.ViewModels
             get
             {
                 return goToRegisterCmd ?? new RelayCommand
-                    (obj => 
-                    { 
-                        Navigator.Navigate(new UC_RegistrationVM(Login, Password));
-                    });
+                    (obj => { Navigator.Navigate(new UC_RegistrationVM(Login, Password)); });
             }
         }
     }

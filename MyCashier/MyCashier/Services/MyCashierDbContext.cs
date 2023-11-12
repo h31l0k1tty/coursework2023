@@ -8,6 +8,8 @@ namespace MyCashier.Services;
 
 public partial class MyCashierDbContext : DbContext
 {
+    public static readonly MyCashierDbContext db = new();
+
     public virtual DbSet<Account> Account { get; set; }
 
     public virtual DbSet<Category> Category { get; set; }
@@ -25,7 +27,6 @@ public partial class MyCashierDbContext : DbContext
     public virtual DbSet<TransactionType> TransactionType { get; set; }
 
     public virtual DbSet<User> User { get; set; }
-
 
     public MyCashierDbContext()
     {

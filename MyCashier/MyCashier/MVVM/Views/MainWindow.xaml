@@ -34,6 +34,12 @@
                        Margin="5" Foreground="White"
                        Width="230" Height="60" 
                        FontSize="50" FontFamily="Britannic Bold"/>
+            <Button Content="Журнал транзакций" HorizontalAlignment="Right" 
+                    Command="{Binding SwitchToJournal}"
+                    Visibility="{Binding AreButtonsVisible, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="Фин. обязанности" HorizontalAlignment="Right" 
+                    Command="{Binding SwitchToDebts}"
+                    Visibility="{Binding AreButtonsVisible, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         
 
@@ -48,11 +54,11 @@
                 <DataTemplate DataType='{x:Type viewmodels:UC_AddAccountVM}'>
                     <views:UC_AddAccount/>
                 </DataTemplate>
-                
-
-
-                <DataTemplate DataType='{x:Type viewmodels:UC_MainVM}'>
-                    <views:UC_Main/>
+                <DataTemplate DataType='{x:Type viewmodels:UC_JournalVM}'>
+                    <views:UC_Journal/>
+                </DataTemplate>
+                <DataTemplate DataType='{x:Type viewmodels:UC_DebtsVM}'>
+                    <views:UC_Debts/>
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>
