@@ -23,6 +23,17 @@ namespace MyCashier.MVVM.ViewModels
             }
         }
 
+        private Visibility isCurrentUserNameVisible = Visibility.Hidden;
+        public Visibility IsCurrentUserNameVisible
+        {
+            get { return isCurrentUserNameVisible; }
+            set
+            {
+                isCurrentUserNameVisible = value;
+                OnPropertyChanged(nameof(IsCurrentUserNameVisible));
+            }
+        }
+
         public object CurrentViewModel //Поле, реплицирующее Navigator.CurrentView
         {
             get { return Navigator.CurrentViewModel; }
@@ -31,17 +42,33 @@ namespace MyCashier.MVVM.ViewModels
                 OnPropertyChanged(nameof(this.CurrentViewModel)); //Оповещаем ContentControl об изменении CurrentViewModel
 
                 if(CurrentViewModel.GetType() == typeof(UC_JournalVM) || CurrentViewModel.GetType() == typeof(UC_DebtsVM))
+                {
                     AreButtonsVisible = Visibility.Visible;
+                    IsCurrentUserNameVisible = Visibility.Visible;
+                }
                 else
+                {
                     AreButtonsVisible = Visibility.Hidden;
+                    IsCurrentUserNameVisible = Visibility.Hidden;
+                }
             }
         }
 
-
+        private string currentUserName = null!;
+        public string CurrentUserName
+        {
+            get { return currentUserName; }
+            set
+            {
+                currentUserName = value;
+                OnPropertyChanged(nameof(CurrentUserName));
+            }
+        }
 
         void UpdateViewModel(object newViewModel) //Метод, принимающий новую ViewModel на замену предыдущей
         {
             CurrentViewModel = newViewModel;
+            CurrentUserName = CurrentUser.Name; //Костыль
         }
 
 

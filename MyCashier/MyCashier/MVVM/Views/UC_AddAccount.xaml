@@ -50,6 +50,7 @@
                               Height="20"
                               Style="{StaticResource ComboBoxStyle}"
                               ItemsSource="{Binding Currencies}"
+                              SelectedItem="{Binding SelectedCurrency, UpdateSourceTrigger=PropertyChanged}"
                               DisplayMemberPath="id" 
                               SelectedValuePath="id"/>
                 </StackPanel>

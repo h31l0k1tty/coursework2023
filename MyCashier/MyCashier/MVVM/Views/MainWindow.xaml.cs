@@ -7,8 +7,8 @@ namespace MyCashier
     {
         public MainWindow()
         {
-            InitializeComponent();
             DataContext = new MainVM();
+            InitializeComponent();
         }
     }
 }

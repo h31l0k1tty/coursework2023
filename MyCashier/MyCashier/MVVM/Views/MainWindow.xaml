@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:MyCashier"
         xmlns:viewmodels="clr-namespace:MyCashier.MVVM.ViewModels"
         xmlns:views="clr-namespace:MyCashier.MVVM.Views"
+        xmlns:services ="clr-namespace:MyCashier.Services"
         Title="MyCashier" 
         Height="830" Width="1280"
         MaxHeight="830" MaxWidth="1280"
@@ -40,6 +41,9 @@
             <Button Content="Фин. обязанности" HorizontalAlignment="Right" 
                     Command="{Binding SwitchToDebts}"
                     Visibility="{Binding AreButtonsVisible, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="{Binding CurrentUserName, UpdateSourceTrigger=PropertyChanged}" 
+                       Visibility="{Binding IsCurrentUserNameVisible, UpdateSourceTrigger=PropertyChanged}" 
+                       Width="Auto" Margin="10" FontSize="16" FontWeight="Bold"/>
         </StackPanel>
         
 

@@ -7,9 +7,9 @@ public partial class Transaction
 {
     public Guid id { get; set; }
 
-    public Guid typeId { get; set; }
+    public Guid typeID { get; set; }
 
-    public Guid accountId { get; set; }
+    public Guid accountID { get; set; }
 
     public string? currency { get; set; }
 
@@ -17,7 +17,7 @@ public partial class Transaction
 
     public DateOnly date { get; set; }
 
-    public Guid categoryId { get; set; }
+    public Guid categoryID { get; set; }
 
     public string? description { get; set; }
 

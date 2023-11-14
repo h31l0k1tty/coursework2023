@@ -50,13 +50,42 @@
                 </Button.Resources>
             </Button>
         </StackPanel>
-        <StackPanel Orientation="Horizontal"
+        <Grid
             Background="#B2B2B2"
-            Width="750" Height="40"
+            Width="750" Height="50"
             VerticalAlignment="Bottom">
-            <Button Content="Создать счёт"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <ScrollViewer Grid.Column="0"
+                          HorizontalScrollBarVisibility="Hidden" 
+                          VerticalScrollBarVisibility="Hidden">
+                <ListView ItemsSource="{Binding Accounts}" Background="Gray">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border CornerRadius="5" Padding="5" Background="White">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding name}" HorizontalAlignment="Left" Margin="5"/>
+                                    <TextBlock Text="{Binding balance}" HorizontalAlignment="Right" Margin="5"/>
+                                    <TextBlock Text="{Binding currencyID}" HorizontalAlignment="Right" Margin="0 5 5 5"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                
+            </ScrollViewer>
+            <Button Grid.Column="1"
+                    Content="+"
                     Command="{Binding GoToAddAccountCmd}"/>
-        </StackPanel>
+        </Grid>
 
         <Button Command="{Binding LogOutCmd}"
             Content="Выйти из профиля"

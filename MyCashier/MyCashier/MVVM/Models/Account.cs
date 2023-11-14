@@ -11,9 +11,9 @@ public partial class Account
 
     public decimal balance { get; set; }
 
-    public string currencyId { get; set; } = null!;
+    public string currencyID { get; set; } = null!;
 
-    public Guid userId { get; set; }
+    public Guid userID { get; set; }
 
     public virtual Currency currency { get; set; } = null!;
 

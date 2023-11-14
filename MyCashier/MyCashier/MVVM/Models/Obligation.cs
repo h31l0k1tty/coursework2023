@@ -7,13 +7,13 @@ public partial class Obligation
 {
     public Guid id { get; set; }
 
-    public Guid typeId { get; set; }
+    public Guid typeID { get; set; }
 
     public bool isActive { get; set; }
 
-    public Guid statusId { get; set; }
+    public Guid statusID { get; set; }
 
-    public Guid accountId { get; set; }
+    public Guid accountID { get; set; }
 
     public string debtor { get; set; } = null!;
 
@@ -23,7 +23,7 @@ public partial class Obligation
 
     public DateOnly date { get; set; }
 
-    public Guid categoryId { get; set; }
+    public Guid categoryID { get; set; }
 
     public string? description { get; set; }
 

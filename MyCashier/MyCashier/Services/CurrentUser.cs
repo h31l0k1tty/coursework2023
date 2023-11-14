@@ -1,11 +1,13 @@
 ﻿using MyCashier.MVVM.Models;
+using MyCashier.MVVM.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
 
 namespace MyCashier.Services
 {
-    public static class CurrentUser
+    public class CurrentUser
     {
         public static Guid Id { get; set; }
 
@@ -18,7 +20,6 @@ namespace MyCashier.Services
         public static string Email { get; set; } = null!;
 
         public static ICollection<Account> Accounts { get; set; } = new List<Account>();
-
 
         public static void SetUser(User user)
         {

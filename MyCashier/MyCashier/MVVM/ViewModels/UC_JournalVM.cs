@@ -1,4 +1,5 @@
-﻿using MyCashier.Services;
+﻿using MyCashier.MVVM.Models;
+using MyCashier.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,18 @@ namespace MyCashier.MVVM.ViewModels
 {
     public class UC_JournalVM : ViewModelBase
     {
+        private List<Account> accounts = MyCashierDbContext.db.Account.Where(c => c.userID == CurrentUser.Id).ToList();
+        public List<Account> Accounts
+        {
+            get { return accounts; }
+            set
+            {
+                accounts = value;
+                OnPropertyChanged(nameof(Accounts));
+            }
+        }
+
+
         private RelayCommand logOutCmd = null!;
         public RelayCommand LogOutCmd
         {

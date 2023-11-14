@@ -15,7 +15,6 @@ namespace MyCashier.MVVM.ViewModels
             if (password != null) _password = password;
         }
 
-
         User? newUser;
 
         private string _login = Properties.Settings.Default.Login;
@@ -52,7 +51,7 @@ namespace MyCashier.MVVM.ViewModels
             }
         }
 
-
+#warning ГОВНО ДО СИХ ПОР
         private void RememberMeChanged(bool isRememberMeChecked)
         {
             Properties.Settings.Default.WasRememberMeChecked = isRememberMeChecked;

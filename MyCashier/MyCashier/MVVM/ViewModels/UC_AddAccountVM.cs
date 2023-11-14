@@ -46,23 +46,19 @@ namespace MyCashier.MVVM.ViewModels
             }
         }
 
-        //private object selectedCurrency = null!;
-        //public object SelectedCurrency
-        //{
-        //    get { return selectedCurrency; }
-        //    set
-        //    {
-        //        if(selectedCurrency != value)
-        //        {
-        //            selectedCurrency = value;
-        //            OnPropertyChanged(nameof(SelectedCurrency));
-        //        }
-        //    }
-        //}
+        private object selectedCurrency = null!;
+        public object SelectedCurrency
+        {
+            get { return selectedCurrency; }
+            set
+            {
+                selectedCurrency = value;
+                OnPropertyChanged(nameof(SelectedCurrency));
+            }
+        }
 
-
-        private ObservableCollection<Currency> currencies = new(MyCashierDbContext.db.Currency.ToList());
-        public ObservableCollection<Currency> Currencies
+        private List<Currency> currencies = new(MyCashierDbContext.db.Currency.ToList());
+        public List<Currency> Currencies
         {
             get { return currencies; }
             set
@@ -73,31 +69,31 @@ namespace MyCashier.MVVM.ViewModels
         }
 
 
-        //private RelayCommand addAccountCmd = null!;
-        //public RelayCommand AddAccountCmd
-        //{
-        //    get
-        //    {
-        //        return addAccountCmd ?? new RelayCommand
-        //            (obj =>
-        //            {
-        //                Account newAccount = new()
-        //                {
-        //                    id = default,
-        //                    name = AccountName.Trim(),
-        //                    balance = Convert.ToDecimal(Balance),
-        //                    currencyId = SelectedCurrency.ToString().Trim(),
-        //                    userId = CurrentUser.Id
-        //                };
-        //                MyCashierDbContext.db.Account.Add(newAccount);
-        //                MyCashierDbContext.db.SaveChanges();
-        //                Navigator.Navigate(new UC_JournalVM());
-        //            }, 
-        //            obj => !String.IsNullOrEmpty(AccountName) &&
-        //                   !String.IsNullOrEmpty(Balance) &&
-        //                   !String.IsNullOrEmpty(SelectedCurrency.ToString()));
-        //    }
-        //}
+        private RelayCommand addAccountCmd = null!;
+        public RelayCommand AddAccountCmd
+        {
+            get
+            {
+                return addAccountCmd ?? new RelayCommand
+                    (obj =>
+                    {
+                        Account newAccount = new()
+                        {
+                            id = default,
+                            name = AccountName.Trim(),
+                            balance = Convert.ToDecimal(Balance),
+                            currencyID = ((Currency)SelectedCurrency).id,
+                            userID = CurrentUser.Id
+                        };
+                        MyCashierDbContext.db.Account.Add(newAccount);
+                        MyCashierDbContext.db.SaveChanges();
+                        Navigator.Navigate(new UC_JournalVM());
+                    },
+                    obj => !String.IsNullOrEmpty(AccountName) &&
+                           !String.IsNullOrEmpty(Balance) &&
+                           SelectedCurrency != null);
+            }
+        }
 
         private RelayCommand cancelCmd = null!;
         public RelayCommand CancelCmd
