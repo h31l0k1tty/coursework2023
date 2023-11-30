@@ -2,11 +2,12 @@
 insert into "User" values
 (default, 'admin', '1234567', 'admin', 'email');
 
-insert into "Currency" VALUES
+insert into "Currency" values
 ('RUB', 'Российский рубль'),
 ('BTC', 'Биткоин'),
 ('USD', 'Доллар США'),
-('EUR', 'Евро');
+('EUR', 'Евро'),
+('CNY', 'Китайский юань');
 
 insert into "Account" values
 (default, 'Admin Account', default, 'RUB',
@@ -16,8 +17,14 @@ insert into "TransactionType" values
 (default, 'Доход'),
 (default, 'Расход');
 
-insert into "Category" values 
-(default, 'Развлечения', null);
+insert into "Category" values
+(default, 'Развлечения', null),
+(default, 'Еда', null),
+(default, 'Транспорт', null),
+(default, 'Путешествия', null),
+(default, 'Супермаркеты', null),
+(default, 'Одежда', null),
+(default, 'Интернет покупки', null);
 
 insert into "Transaction" values 
 (   
@@ -31,24 +38,22 @@ insert into "Transaction" values
 );
 
 insert into "ObligationType" values 
-(default, 'Одолжение'),
-(default, 'Долг');
+(default, 'Должен'),
+(default, 'Одолжил');
 
 insert into "ObligationStatus" values 
-(default, 'Выплачено'),
-(default, 'Прощено');
+(default, 'Активно'),
+(default, 'Закрыто');
 
 insert into "Obligation" values 
 (
     default, 
-    (select "id" from "ObligationType" where "name" = 'Долг'), 
-    true, 
+    (select "id" from "ObligationType" where "name" = 'Одолжил'),
     (select "id" from "ObligationStatus" where "name" = 'Прощено'),
     (select "id" from "Account" where "name" = 'Admin Account'),
-    'Вася',
+    'Васе',
     'RUB',
     1000,
     '10.22.2023',
-    (select "id" from "Category" where "name" = 'Развлечения'),
     'Васе не хватило на билет в театр'
 );

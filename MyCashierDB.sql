@@ -53,7 +53,7 @@ create table "Transaction"(
     "id" uuid default gen_random_uuid() NOT NULL,
     "typeID" uuid references "TransactionType"("id") NOT NULL,
     "accountID" uuid references "Account"("id") NOT NULL,
-    "currency" char(3) references "Currency"("id"),
+    "currencyID" char(3) references "Currency"("id") NOT NULL,
     "sum" decimal NOT NULL,
     "date" date NOT NULL,
     "categoryID" uuid references "Category"("id") NOT NULL,
@@ -73,52 +73,54 @@ create table "ObligationStatus"(
 create table "Obligation"(
     "id" uuid default gen_random_uuid() NOT NULL,
     "typeID" uuid references "ObligationType"("id") NOT NULL,
-    "isActive" bool NOT NULL,
     "statusID" uuid references "ObligationStatus"("id") NOT NULL,
     "accountID" uuid references "Account"("id") NOT NULL,
-    "debtor" varchar(50) unique NOT NULL,
-    "currency" char(3) references "Currency"("id"),
+    "debtor" varchar(50) NOT NULL,
+    "currencyID" char(3) references "Currency"("id") NOT NULL,
     "sum" decimal NOT NULL,
     "date" date NOT NULL,
-    "categoryID" uuid references "Category"("id") NOT NULL,
     "description" text,
     PRIMARY KEY("id")
 );
 
 
 create view "TransactionsJournal"
-as select 
-    "TransactionType"."name" as "Операция",
-    "Account"."name" as "Счёт",
-    "Transaction"."currency" as "Валюта",
-    "Transaction"."sum" as "Сумма",
-    "Transaction"."date" as "Дата",
-    "Category"."name" as "Категория",
-    "Transaction"."description" as "Описание"
+as select
+    "Transaction"."id" as "TransactionID",
+    "User"."name" as "User",
+    "TransactionType"."name" as "TransactionTypeName",
+    "Account"."name" as "AccountName",
+    "Transaction"."currencyID" as "Currency",
+    "Transaction"."sum" as "Sum",
+    "Transaction"."date" as "Date",
+    "Category"."name" as "Category",
+    "Transaction"."description" as "Description"
     from 
-    "TransactionType", "Account", "Category", "Transaction" 
-    where 
+    "TransactionType", "Account", "Category", "Transaction", "User"
+    where
     "TransactionType"."id" = "Transaction"."typeID" and
     "Account"."id" = "Transaction"."accountID" and
+    "Account"."userID" = "User"."id" and
     "Category"."id" = "Transaction"."categoryID";
 create view "ObligationsJournal"
-as select 
-    "ObligationType"."name" as "Операция",
-    "Obligation"."isActive" as "Активно",
-    "ObligationStatus"."name" as "Статус",
-    "Account"."name" as "Счёт",
-    "Obligation"."debtor" as "Должник",
-    "Obligation"."currency" as "Валюта",
-    "Obligation"."sum" as "Сумма",
-    "Obligation"."date" as "Дата",
-    "Category"."name" as "Категория",
-    "Obligation"."description" as "Описание"
+as select
+    "Obligation"."id" as "ObligationID",
+    "User"."name" as "User",
+    "ObligationType"."name" as "ObligationTypeName",
+    "ObligationStatus"."name" as "StatusName",
+    "Account"."name" as "AccountName",
+    "Obligation"."debtor" as "Debtor",
+    "Obligation"."currencyID" as "Currency",
+    "Obligation"."sum" as "Sum",
+    "Obligation"."date" as "Date",
+    "Obligation"."description" as "Description"
     from 
-    "ObligationType", "ObligationStatus", "Account", "Category", "Obligation" 
+    "ObligationType", "ObligationStatus", "Account", "Obligation", "User"
     where 
     "ObligationType"."id" = "Obligation"."typeID" and
+    "ObligationStatus"."id" = "Obligation"."statusID" and
     "Account"."id" = "Obligation"."accountID" and
-    "Category"."id" = "Obligation"."categoryID";
+    "Account"."userID" = "User"."id";
 
     select * from "TransactionsJournal";
     select * from "ObligationsJournal";
